@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Secret Wish for You!</title>
+    <style>
+        :root {
+            --primary-pink: #ff4d6d;
+            --accent-gold: #ffeb3b;
+            --text-dark: #333;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ff4d6d 0%, #ff758c 100%);
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        #unlock-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ff4d6d;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+        }
+
+        #main-content {
+            display: none;
+            position: relative;
+            z-index: 10;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .particle {
+            position: fixed;
+            top: -10%;
+            z-index: 1;
+            user-select: none;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            max-width: 400px;
+            margin: 30px 0;
+        }
+
+        .photo-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            aspect-ratio: 1 / 1;
+        }
+
+        .message-card {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-dark);
+            padding: 25px;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 85%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-bottom: 5px solid var(--accent-gold);
+        }
+
+        .btn-unlock {
+            background: white;
+            color: #ff4d6d;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            border: none;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body onload="checkUnlock()">
+
+    <div id="unlock-screen">
+        <div style="font-size: 5rem; animation: pulse 2s infinite;">🎁</div>
+        <h2>Happy Mother's Day!</h2>
+        <p>I have a special surprise for you.</p>
+        <button class="btn-unlock" onclick="askName()">TAP TO OPEN</button>
+    </div>
+
+    <div id="main-content">
+        <header>
+            <h1>To the Best Mom!</h1>
+            <p style="opacity:0.9;">Today is all about you.</p>
+        </header>
+
+        <div class="photo-grid">
+            <img src="https://postimg.cc/f3sV42rK][img]https://i.postimg.cc/f3sV42rK/IMG-20190527-141459.jpg[/img][/url]" alt="Photo 1">
+            <img src="https://postimg.cc/cgXgBRTM][img]https://i.postimg.cc/cgXgBRTM/IMG-20200510-212019.jpg[/img][/url]" alt="Photo 2">
+            <img src="https://postimg.cc/0zDzBRcz][img]https://i.postimg.cc/0zDzBRcz/IMG-20230123-WA0071.jpg[/img][/url]" alt="Photo 3">
+            <img src="https://postimg.cc/TyxK874N][img]https://i.postimg.cc/TyxK874N/IMG20241031213523.jpg[/img][/url]" alt="Photo 4">
+        </div>
+
+        <div class="message-card">
+            <div style="font-size: 1.5rem; font-weight: bold; color: #ff4d6d;">Happy Mother's Day!</div>
+            <div style="margin: 10px 0;">💖 🌸 💖</div>
+            <div style="font-style: italic; line-height: 1.6;">
+                "Dear Amma,
+                 words will never be enough to express how much you mean to me. Every sacrifuce you made,every sleepless night,every prayer you whispered-I felt all of it,even when I didn't say so. You are the reason I know what strength looks like. You are home. Thank you for being my mother."
+            </div>
+            <p style="font-weight:bold; color:#777; margin-top: 15px;">From: Gayathri</p>
+        </div>
+
+        <footer style="margin-top: 40px; font-size: 0.8rem; opacity: 0.7;">
+            Made with love ❤️
+        </footer>
+    </div>
+
+    <script>
+        function checkUnlock() {
+            if (localStorage.getItem('mdUnlocked') === 'true') {
+                showContent();
+            }
+        }
+
+        function askName() {
+            let name = prompt("Please enter your name to unlock the gift:");
+            if (name && name.toLowerCase().includes("Gayathri")) {
+                localStorage.setItem('mdUnlocked', 'true');
+                showContent();
+            } else if (name !== null) {
+                alert("Try entering 'Mom'!");
+            }
+        }
+
+        function showContent() {
+            document.getElementById('unlock-screen').style.display = 'none';
+            document.getElementById('main-content').style.display = 'flex';
+            setInterval(createParticle, 300);
+        }
+
+        function createParticle() {
+            const symbols = ['🌸', '❤️', '✨', '💖', '🌹'];
+            const p = document.createElement('div');
+            p.classList.add('particle');
+            p.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.fontSize = Math.random() * 20 + 20 + 'px';
+            p.style.animationDuration = Math.random() * 3 + 2 + 's';
+            p.style.opacity = Math.random();
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 5000);
+        }
+    </script>
+</body>
+  </html>
