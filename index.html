@@ -60,7 +60,7 @@
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin: 0;
             text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
             animation: pulse 2s infinite;
@@ -130,18 +130,17 @@
         </header>
 
         <div class="photo-grid">
-            <img src="https://postimg.cc/f3sV42rK][img]https://i.postimg.cc/f3sV42rK/IMG-20190527-141459.jpg[/img][/url]" alt="Photo 1">
-            <img src="https://postimg.cc/cgXgBRTM][img]https://i.postimg.cc/cgXgBRTM/IMG-20200510-212019.jpg[/img][/url]" alt="Photo 2">
-            <img src="https://postimg.cc/0zDzBRcz][img]https://i.postimg.cc/0zDzBRcz/IMG-20230123-WA0071.jpg[/img][/url]" alt="Photo 3">
-            <img src="https://postimg.cc/TyxK874N][img]https://i.postimg.cc/TyxK874N/IMG20241031213523.jpg[/img][/url]" alt="Photo 4">
+            <img src="https://i.postimg.cc/f3sV42rK/IMG-20190527-141459.jpg" alt="Photo 1">
+            <img src="https://i.postimg.cc/cgXgBRTM/IMG-20200510-212019.jpg" alt="Photo 2">
+            <img src="https://i.postimg.cc/0zDzBRcz/IMG-20230123-WA0071.jpg" alt="Photo 3">
+            <img src="https://i.postimg.cc/TyxK874N/IMG20241031213523.jpg" alt="Photo 4">
         </div>
 
         <div class="message-card">
             <div style="font-size: 1.5rem; font-weight: bold; color: #ff4d6d;">Happy Mother's Day!</div>
             <div style="margin: 10px 0;">💖 🌸 💖</div>
             <div style="font-style: italic; line-height: 1.6;">
-                "Dear Amma,
-                 words will never be enough to express how much you mean to me. Every sacrifuce you made,every sleepless night,every prayer you whispered-I felt all of it,even when I didn't say so. You are the reason I know what strength looks like. You are home. Thank you for being my mother."
+                "Dear Amma, words will never be enough to express how much you mean to me. Every sacrifice you made, every sleepless night, every prayer you whispered—I felt all of it, even when I didn't say so. You are the reason I know what strength looks like. You are home. Thank you for being my mother."
             </div>
             <p style="font-weight:bold; color:#777; margin-top: 15px;">From: Gayathri</p>
         </div>
@@ -160,11 +159,15 @@
 
         function askName() {
             let name = prompt("Please enter your name to unlock the gift:");
-            if (name && name.toLowerCase().includes("Gayathri")) {
-                localStorage.setItem('mdUnlocked', 'true');
-                showContent();
-            } else if (name !== null) {
-                alert("Try entering 'Mom'!");
+            if (name) {
+                let check = name.trim().toLowerCase();
+                // This will now work for "mom", "gundhu", or "gayathri"
+                if (check.includes("mom") || check.includes("gayathri") || check.includes("amma")) {
+                    localStorage.setItem('mdUnlocked', 'true');
+                    showContent();
+                } else {
+                    alert("Try entering 'Amma' or 'Mom'!");
+                }
             }
         }
 
@@ -188,4 +191,4 @@
         }
     </script>
 </body>
-  </html>
+</html>
